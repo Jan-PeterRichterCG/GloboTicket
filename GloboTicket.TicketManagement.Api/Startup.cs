@@ -111,7 +111,7 @@ namespace GloboTicket.TicketManagement.Api
 
             app.UseCors("Open");
 
-            app.UseAuthorization();
+            // app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -8,6 +8,7 @@ using GloboTicket.TicketManagement.Application.Features.Events.Queries.GetEvents
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,10 +20,13 @@ namespace GloboTicket.TicketManagement.Api.Controllers
     public class EventsController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly ILogger _logger;
 
-        public EventsController(IMediator mediator)
+        public EventsController(IMediator mediator, ILogger<EventsController> logger)
         {
             _mediator = mediator;
+
+            _logger = logger;
         }
 
         [HttpGet(Name = "GetAllEvents")]
@@ -30,7 +34,11 @@ namespace GloboTicket.TicketManagement.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<ActionResult<List<EventListVm>>> GetAllEvents()
         {
+            _logger.LogDebug("GetAllEvents...");
+
             var dtos = await _mediator.Send(new GetEventsListQuery());
+
+            _logger.LogDebug($"Found Events: {@dtos.Count}");
             return Ok(dtos);
         }
 
