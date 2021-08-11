@@ -22,9 +22,12 @@ namespace GloboTicket.TicketManagement.Identity
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
             services.AddDbContext<GloboTicketIdentityDbContext>(
-                options => options.UseInMemoryDatabase("GloboTicketDbContextInMemoryTest")
-                /* options => options.UseSqlServer(configuration.GetConnectionString("GloboTicketIdentityConnectionString"),
-                b => b.MigrationsAssembly(typeof(GloboTicketIdentityDbContext).Assembly.FullName)) */
+                /* alternative 1: use InMemory database for regular application executiopn (non-test) */
+                /* options => options.UseInMemoryDatabase("GloboTicketDbContextInMemoryTest") */
+
+                /* alternative 2: use SQLServer for regular application executiopn (non-test) */
+                options => options.UseSqlServer(configuration.GetConnectionString("GloboTicketIdentityConnectionString"),
+                b => b.MigrationsAssembly(typeof(GloboTicketIdentityDbContext).Assembly.FullName))
                 );
 
             services.AddIdentity<ApplicationUser, IdentityRole>()

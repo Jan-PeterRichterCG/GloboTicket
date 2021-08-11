@@ -10,7 +10,8 @@
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.10" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.10" />
+		<!-- uncomment following line if you want to use InMemory Database for regular application execution (non-test) -->
+		<!-- <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.10" /> -->
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

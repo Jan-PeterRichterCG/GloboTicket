@@ -10,8 +10,9 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" /> 
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
+    <!-- uncomment following line if you want to use InMemory Database for regular application execution (non-test) --> 
+		<!-- <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.10" /> -->
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.10" />
 	</ItemGroup>
 	
