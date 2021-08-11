@@ -6,11 +6,11 @@
         <div class="card-body">
             <EditForm Model="@LoginViewModel" OnValidSubmit="HandleValidSubmit">
                 <div class="input-group row mt-2">
-                    <label class="col-12 col-md-4 p-0" for="userName">Email:</label>
+                    <label class="col-12 col-md-4 p-0" for="userName">Email: (try 'john@test.com')</label>
                     <InputText id="userName" class="col-12 col-md-8 login-field" @bind-Value="LoginViewModel.Email"></InputText>
                 </div>
                 <div class="input-group row mt-2">
-                    <label class="col-12 col-md-4 p-0" for="password">Password:</label>
+                    <label class="col-12 col-md-4 p-0" for="password">Password: (try 'Plural&01?')</label>
                     <InputText type="password" id="password" class="col-12 col-md-8 login-field" @bind-Value="@LoginViewModel.Password"></InputText>
                 </div>
                 <div class="input-group row mt-2">
