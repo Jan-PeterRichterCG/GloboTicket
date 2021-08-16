@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,9 @@ namespace GloboTicket.TicketManagement.App.Razor
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // see https://stackoverflow.com/questions/51642671/adding-handler-to-default-http-client-in-asp-net-core answer #8
+            services.AddTransient<HttpMessageHandlerBuilder, CustomHttpMessageHandlerBuilder>();
+
             services.AddHttpClient<IGloboTicketClient, GloboTicketClient>();
             services.AddRazorPages();
         }
