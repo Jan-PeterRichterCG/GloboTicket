@@ -1,0 +1,22 @@
+﻿@page
+@model GloboTicket.TicketManagement.App.Razor.Pages.EventsModel
+@{
+}
+
+<table>
+    <tr>
+        <th>EventId</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Image</th>
+    </tr>
+    @foreach (var evnt in Model.AllEvents)
+    {
+    <tr>
+        <td>@evnt.EventId</td>
+        <td>@evnt.Name</td>
+        <td>@evnt.Date</td>
+        <td><img src="@evnt.ImageUrl" width="100" height="100" /></td>
+    </tr>
+    }
+</table>
