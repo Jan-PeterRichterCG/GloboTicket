@@ -23,7 +23,7 @@ namespace GloboTicket.TicketManagement.App.Razor
 
         public override System.Net.Http.HttpMessageHandler Build()
         {
-            _logger.LogDebug("Build the HttpMessageHandler by creating a XLocalhostCertificateWithChainErrorAcceptingHttpCLientHandler");
+            _logger.LogDebug("Build the HttpMessageHandler by creating a LocalhostCertificateWithChainErrorAcceptingHttpCLientHandler");
             return new LocalhostCertificateWithChainErrorAcceptingHttpCLientHandler(_loggerFactory);
         }
 
