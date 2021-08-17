@@ -23,11 +23,6 @@ namespace GloboTicket.TicketManagement.App.RazorMVC.Controllers
             return View();
         }
 
-        public IActionResult Events()
-        {
-            return View();
-        }
-
         public IActionResult Privacy()
         {
             return View();
