@@ -26,5 +26,11 @@ namespace GloboTicket.TicketManagement.Api.Controllers
         {
             return Ok(await _authenticationService.RegisterAsync(request));
         }
+
+        [HttpPost("unregister")]
+        public async Task<ActionResult<UnregistrationResponse>> UnregisterAsync(UnregistrationRequest request)
+        {
+            return Ok(await _authenticationService.UnregisterAsync(request));
+        }
     }
 }

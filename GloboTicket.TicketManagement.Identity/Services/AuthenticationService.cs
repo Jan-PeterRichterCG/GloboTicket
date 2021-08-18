@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace GloboTicket.TicketManagement.Identity.Services
 {
-    public class AuthenticationService: IAuthenticationService
+    public class AuthenticationService : IAuthenticationService
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -54,7 +54,7 @@ namespace GloboTicket.TicketManagement.Identity.Services
                 Email = user.Email,
                 UserName = user.UserName
             };
-            
+
             return response;
         }
 
@@ -97,6 +97,29 @@ namespace GloboTicket.TicketManagement.Identity.Services
             }
         }
 
+
+        public async Task<UnregistrationResponse> UnregisterAsync(UnregistrationRequest request)
+        {
+            var existingUser = await _userManager.FindByNameAsync(request.UserName);
+
+            if (existingUser == null)
+            {
+                // this is not considered as an error
+                return new UnregistrationResponse();
+            }
+
+            var result = await _userManager.DeleteAsync(existingUser);
+
+            if (result.Succeeded)
+            {
+                return new UnregistrationResponse();
+            }
+            else
+            {
+                throw new Exception($"{result.Errors}");
+            }
+        }
+        
         private async Task<JwtSecurityToken> GenerateToken(ApplicationUser user)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);
