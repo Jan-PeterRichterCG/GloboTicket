@@ -21,8 +21,10 @@ namespace GloboTicket.TicketManagement.API.IntegrationTests.Controllers
         [Fact]
         public async Task ReturnsSuccessResult()
         {
-            var client = _factory.GetAnonymousClient();
+            // phase I: create the http client
+            var client = await _factory.GetAuthenticatedClientAsync();
 
+            //phase II: do the actual http request that requires authentication
             var response = await client.GetAsync("/api/category/all");
 
             response.EnsureSuccessStatusCode();
