@@ -45,7 +45,7 @@ namespace GloboTicket.TicketManagement.API.IntegrationTests.Controllers
             var client = await _factory.GetAuthenticatedClientAsync();
 
             //phase II: do the actual http request that requires authentication
-            var response = await client.GetAsync("/api/category/allwithevents");
+            var response = await client.GetAsync("/api/category/allwithevents?includeHistory=true");
 
             response.EnsureSuccessStatusCode();
 
@@ -60,5 +60,33 @@ namespace GloboTicket.TicketManagement.API.IntegrationTests.Controllers
             Assert.NotNull(concertsEventList);
             Assert.NotEmpty(concertsEventList.Events);
         }
+
+        [Fact]
+        public async Task ReturnsSuccessResultWithEventsWithIncludeHistorySetToFalse()
+        {
+            // phase I: create the http client
+            var client = await _factory.GetAuthenticatedClientAsync();
+
+            //phase II: do the actual http request that requires authentication
+            var response = await client.GetAsync("/api/category/allwithevents?includeHistory=false");
+
+            response.EnsureSuccessStatusCode();
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            var result = JsonConvert.DeserializeObject<List<CategoryEventListVm>>(responseString);
+            
+            Assert.IsType<List<CategoryEventListVm>>(result);
+            Assert.NotEmpty(result);
+
+            foreach(CategoryEventListVm category in result) 
+            {
+                foreach(CategoryEventDto categoryEvent in category.Events) 
+                {
+                    Assert.False(categoryEvent.Date < System.DateTime.Today);
+                }
+            }
+        }
+
     }
 }

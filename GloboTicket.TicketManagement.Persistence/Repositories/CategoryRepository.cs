@@ -19,7 +19,13 @@ namespace GloboTicket.TicketManagement.Persistence.Repositories
             var allCategories = await _dbContext.Categories.Include(x => x.Events).ToListAsync();
             if(!includePassedEvents)
             {
-                allCategories.ForEach(p => p.Events.ToList().RemoveAll(c => c.Date < DateTime.Today));
+                foreach(Category p in allCategories)
+                {
+                    // Events is only an ICollection<Event> but not a List<Events>. Therefore, you cannot p.Events.RemoveAll(c => c.Date < DateTime.Today);
+                    var newList = p.Events.ToList();
+                    newList.RemoveAll(c => c.Date < DateTime.Today);
+                    p.Events = newList;
+                }
             }
             return allCategories;
         }
