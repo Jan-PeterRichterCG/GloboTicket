@@ -26,10 +26,12 @@ namespace GloboTicket.TicketManagement.App.Pages
             if((bool)args.Value)
             {
                 Categories = await CategoryDataService.GetAllCategoriesWithEvents(true);
+                StateHasChanged();
             }
             else
             {
                 Categories = await CategoryDataService.GetAllCategoriesWithEvents(false);
+                StateHasChanged();
             }
         }
     }
