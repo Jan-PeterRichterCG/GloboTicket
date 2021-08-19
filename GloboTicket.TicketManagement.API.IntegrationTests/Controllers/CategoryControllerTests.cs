@@ -56,17 +56,9 @@ namespace GloboTicket.TicketManagement.API.IntegrationTests.Controllers
             Assert.IsType<List<CategoryEventListVm>>(result);
             Assert.NotEmpty(result);
 
-            var  concertsFound = false;
-            foreach(CategoryEventListVm eventlist in result) 
-            {
-                if(eventlist.Name.Equals("Concerts")) 
-                {
-                    concertsFound = true;
-                    Assert.NotEmpty(eventlist.Events);
-                    break;
-                }
-            }
-            Assert.True(concertsFound);
+            var concertsEventList = result.Find(x => x.Name.Equals("Concerts"));
+            Assert.NotNull(concertsEventList);
+            Assert.NotEmpty(concertsEventList.Events);
         }
     }
 }
